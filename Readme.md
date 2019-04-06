@@ -28,10 +28,10 @@ obviously we'll be adding a class called `Customer`. This will contain the data 
 
 ## Phase 3 - Add the DbUp project to create and migrate the database
 
-- [ ] Create a console application.
-- [ ] Install Dapper.
-- [ ] Write the scripts to create the `Customers` table.
-- [ ] Run it manually and verify the database and the table are created.
+- [x] Create a console application.
+- [x] Install Dapper.
+- [x] Write the scripts to create the `Customers` table.
+- [x] Run it manually and verify the database and the table are created.
 
 ---
 
