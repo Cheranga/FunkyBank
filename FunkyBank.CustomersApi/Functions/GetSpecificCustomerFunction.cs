@@ -21,7 +21,7 @@ namespace FunkyBank.CustomersApi.Functions
     {
         [FunctionName("GetSpecificCustomer")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "customers/{id}")]
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "customers/{id}")]
             HttpRequest request,
             string id,
             [Inject] ICustomerService customerService,

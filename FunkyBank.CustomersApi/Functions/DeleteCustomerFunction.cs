@@ -19,7 +19,7 @@ namespace FunkyBank.CustomersApi.Functions
     {
         [FunctionName("DeleteCustomer")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "customers/{id}")]
+            [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "customers/{id}")]
             HttpRequest req,
             string id,
             [Inject] ICustomerService customerService,

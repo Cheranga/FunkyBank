@@ -18,7 +18,7 @@ namespace FunkyBank.CustomersApi.Functions
     {
         [FunctionName("UpdateCustomer")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "put", Route = "customers")]
+            [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "customers")]
             HttpRequest req,
             [Inject] ICustomerService customerService,
             ILogger logger)
