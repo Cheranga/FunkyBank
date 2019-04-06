@@ -84,7 +84,7 @@ namespace FunkyBank.DataAccess.Dapper.Repositories
             try
             {
                 const string query = "insert into customers (Name, Address) " +
-                                     "output inserted.Id, inserted.Name " +
+                                     "output inserted.Id, inserted.Name, inserted.Address " +
                                      "values (@Name, @Address)";
 
                 using (var connection = new SqlConnection(_config.ConnectionString))
@@ -116,13 +116,13 @@ namespace FunkyBank.DataAccess.Dapper.Repositories
 
             try
             {
-                const string query = "update customers set name=@Name " +
-                                     "output inserted.Id, inserted.Name " +
+                const string query = "update customers set name=@Name, Address=@Address " +
+                                     "output inserted.Id, inserted.Name, inserted.Address " +
                                      "where id=@Id";
 
                 using (var connection = new SqlConnection(_config.ConnectionString))
                 {
-                    var updatedCustomer = await connection.QueryFirstOrDefaultAsync<Customer>(query, new { customer.Name, customer.Id });
+                    var updatedCustomer = await connection.QueryFirstOrDefaultAsync<Customer>(query, customer);
                    
                     if (updatedCustomer == null)
                     {

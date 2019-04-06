@@ -43,7 +43,9 @@ namespace FunkyBank.Services
             if (operationResult.Status)
             {
                 _logger.LogInformation("Customer created successfully");
-                return OperationResult<CreateCustomerResponse>.Success(new CreateCustomerResponse(new CustomerDisplayModel(request.Name, request.Address)));
+
+                var createdCustomer = operationResult.Data;
+                return OperationResult<CreateCustomerResponse>.Success(new CreateCustomerResponse(new CustomerDisplayModel(createdCustomer.Name, createdCustomer.Address)));
             }
 
             _logger.LogInformation("Error: Cannot create customer");
@@ -71,7 +73,9 @@ namespace FunkyBank.Services
             if (operationResult.Status)
             {
                 _logger.LogInformation("Customer updated successfully");
-                return OperationResult<UpdateCustomerResponse>.Success(new UpdateCustomerResponse(new CustomerDisplayModel(request.Name, request.Address)));
+
+                var updatedCustomer = operationResult.Data;
+                return OperationResult<UpdateCustomerResponse>.Success(new UpdateCustomerResponse(new CustomerDisplayModel(updatedCustomer.Name, updatedCustomer.Address)));
             }
 
             _logger.LogError("Error: Cannot update customer");
