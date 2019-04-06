@@ -60,3 +60,5 @@ Once the database was created/migrated in your application you can use the norma
 * *When you need to pass command line arguments certain values need to be escaped*
 
 https://ss64.com/nt/syntax-esc.html
+
+* *Although you import the source code from GitHub to Azure Repo and, if you are pushing the changes to GitHub itself, the CI pipeline must be pointing to the GitHub repo NOT to the Azure repo*
