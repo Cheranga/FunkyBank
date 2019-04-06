@@ -51,12 +51,12 @@ obviously we'll be adding a class called `Customer`. This will contain the data 
 
 https://www.sqlservercentral.com/articles/the-output-clause-for-insert-and-delete-statements
 
-* *Create a new SQL user with SQL server login*
-
-
-
 * *When migrating using DbUp when specifying the connection string, I found out that unless you provide an SQL server authenticated login it will error out with allow remote connections blah blah error*
   * So created another new login in SQL Server (https://www.ibm.com/support/knowledgecenter/SSHLNR_8.1.4/com.ibm.pm.doc/install/sql_config_agent_grant_permission_sqlserver.htm)
   * Used a connection string with that user name and password when passing the connection string to the DbUp console.
 
 Once the database was created/migrated in your application you can use the normal localdbconnection, without specifying any user name/password details
+
+* *When you need to pass command line arguments certain values need to be escaped*
+
+https://ss64.com/nt/syntax-esc.html
