@@ -16,13 +16,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuncyBank.CustomersApi", "FuncyBank.CustomersApi\FuncyBank.CustomersApi.csproj", "{CAD5DC63-5340-4AD0-9FCA-1C92D9C39E69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyBank.CustomersApi", "FunkyBank.CustomersApi\FunkyBank.CustomersApi.csproj", "{CAD5DC63-5340-4AD0-9FCA-1C92D9C39E69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunkyBank.Services", "FunkyBank.Services\FunkyBank.Services.csproj", "{414D59AD-E09B-4D67-B565-B6E8F546093A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyBank.Services", "FunkyBank.Services\FunkyBank.Services.csproj", "{414D59AD-E09B-4D67-B565-B6E8F546093A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunkyBank.DataAccess.Core", "FunkyBank.DataAccess.Core\FunkyBank.DataAccess.Core.csproj", "{73FB4B02-6B42-4E7B-9A52-EFD25FEFDA99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyBank.DataAccess.Core", "FunkyBank.DataAccess.Core\FunkyBank.DataAccess.Core.csproj", "{73FB4B02-6B42-4E7B-9A52-EFD25FEFDA99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunkyBank.DataAccess.Dapper", "FunkyBank.DataAccess.Dapper\FunkyBank.DataAccess.Dapper.csproj", "{00B6CF18-6A24-4F93-9B4F-5E3BCC00A712}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyBank.DataAccess.Dapper", "FunkyBank.DataAccess.Dapper\FunkyBank.DataAccess.Dapper.csproj", "{00B6CF18-6A24-4F93-9B4F-5E3BCC00A712}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyBank.Core", "FunkyBank.Core\FunkyBank.Core.csproj", "{15B03E38-EE84-4712-8131-D14B7518EE80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunkyBank.DTO", "FunkyBank.DTO\FunkyBank.DTO.csproj", "{33F5AE92-2A6C-45A0-B06A-8667E6CA8D0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +50,14 @@ Global
 		{00B6CF18-6A24-4F93-9B4F-5E3BCC00A712}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00B6CF18-6A24-4F93-9B4F-5E3BCC00A712}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00B6CF18-6A24-4F93-9B4F-5E3BCC00A712}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15B03E38-EE84-4712-8131-D14B7518EE80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15B03E38-EE84-4712-8131-D14B7518EE80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15B03E38-EE84-4712-8131-D14B7518EE80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15B03E38-EE84-4712-8131-D14B7518EE80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33F5AE92-2A6C-45A0-B06A-8667E6CA8D0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33F5AE92-2A6C-45A0-B06A-8667E6CA8D0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33F5AE92-2A6C-45A0-B06A-8667E6CA8D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33F5AE92-2A6C-45A0-B06A-8667E6CA8D0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +67,8 @@ Global
 		{414D59AD-E09B-4D67-B565-B6E8F546093A} = {BCC95C5D-ABBA-4D7C-9243-29BD7A509BC0}
 		{73FB4B02-6B42-4E7B-9A52-EFD25FEFDA99} = {AEE9F748-D991-46A6-958A-D6AD9209D588}
 		{00B6CF18-6A24-4F93-9B4F-5E3BCC00A712} = {FD473F36-3C8F-4E6C-8D39-02391ED72CCD}
+		{15B03E38-EE84-4712-8131-D14B7518EE80} = {AEE9F748-D991-46A6-958A-D6AD9209D588}
+		{33F5AE92-2A6C-45A0-B06A-8667E6CA8D0C} = {1BF6A50C-BD66-4406-B409-D1CA03951D2A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6EA89487-2CF7-402A-811C-F7A102E1781B}
