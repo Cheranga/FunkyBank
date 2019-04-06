@@ -2,7 +2,9 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Web.Http;
+using AzureFunctions.Autofac;
 using FunkyBank.Core;
+using FunkyBank.DataAccess.Dapper;
 using FunkyBank.DTO.Requests;
 using FunkyBank.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -14,13 +16,14 @@ using Newtonsoft.Json;
 
 namespace FunkyBank.CustomersApi.Functions
 {
+    [DependencyInjectionConfig(typeof(ApiBootstrapper))]
     public static class InsertCustomerFunction
     {
         [FunctionName("InsertCustomerFunction")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = "customers")] HttpRequest req,
-            ILogger logger,
-            ICustomerService customerService)
+            [Inject]ICustomerService customerService,
+            ILogger logger)
         {
             logger.LogInformation($"Calling {nameof(InsertCustomerFunction)}");
 

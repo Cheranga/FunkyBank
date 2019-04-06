@@ -9,8 +9,8 @@ namespace FunkyBank.DataAccess.Core.Interfaces
     {
         Task<OperationResult<List<Customer>>> GetCustomersAsync();
         Task<OperationResult<Customer>> GetCustomerAsync(int customerId);
-        Task<OperationResult> CreateCustomerAsync(Customer customer);
-        Task<OperationResult> UpdateCustomerAsync(Customer customer);
+        Task<OperationResult<Customer>> CreateCustomerAsync(Customer customer);
+        Task<OperationResult<Customer>> UpdateCustomerAsync(Customer customer);
         Task<OperationResult> DeleteCustomerAsync(int customerId);
     }
 }

@@ -51,4 +51,8 @@ obviously we'll be adding a class called `Customer`. This will contain the data 
 
 https://www.sqlservercentral.com/articles/the-output-clause-for-insert-and-delete-statements
 
+* *Create a new SQL user with SQL server login*
+
+https://www.ibm.com/support/knowledgecenter/SSHLNR_8.1.4/com.ibm.pm.doc/install/sql_config_agent_grant_permission_sqlserver.htm
+
 

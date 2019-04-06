@@ -5,12 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.2.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FunkyBank.Core\FunkyBank.Core.csproj" />
     <ProjectReference Include="..\FunkyBank.DataAccess.Core\FunkyBank.DataAccess.Core.csproj" />
+    <ProjectReference Include="..\FunkyBank.DataAccess.Dapper\FunkyBank.DataAccess.Dapper.csproj" />
     <ProjectReference Include="..\FunkyBank.DTO\FunkyBank.DTO.csproj" />
   </ItemGroup>
 
