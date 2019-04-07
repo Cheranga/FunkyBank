@@ -62,3 +62,7 @@ Once the database was created/migrated in your application you can use the norma
 https://ss64.com/nt/syntax-esc.html
 
 * *Although you import the source code from GitHub to Azure Repo and, if you are pushing the changes to GitHub itself, the CI pipeline must be pointing to the GitHub repo NOT to the Azure repo*
+
+* *Linking AKV secrets in your Azure Devops pipeline*
+
+https://docs.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=designer#link-secrets-from-an-azure-key-vault
