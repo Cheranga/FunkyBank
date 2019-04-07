@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using FunkyBank.Core;
@@ -17,11 +15,13 @@ namespace FunkyBank.DataAccess.Dapper.Repositories
     public class CustomerRepository : ICustomerRepository
     {
         private readonly DatabaseConfig _config;
+        private readonly IDbConnectionFactory _connectionFactory;
         private readonly ILogger<CustomerRepository> _logger;
 
-        public CustomerRepository(DatabaseConfig config,  ILogger<CustomerRepository> logger)
+        public CustomerRepository(DatabaseConfig config, IDbConnectionFactory connectionFactory, ILogger<CustomerRepository> logger)
         {
             _config = config;
+            _connectionFactory = connectionFactory;
             _logger = logger;
         }
 
@@ -31,7 +31,7 @@ namespace FunkyBank.DataAccess.Dapper.Repositories
 
             try
             {
-                using (var connection = new SqlConnection(_config.ConnectionString))
+                using (var connection = _connectionFactory.GetConnection(_config.ConnectionString))
                 {
                     var customers = await connection.QueryAsync<Customer>("select * from customers").ConfigureAwait(false);
 
@@ -45,15 +45,15 @@ namespace FunkyBank.DataAccess.Dapper.Repositories
             }
         }
 
-        public async  Task<OperationResult<Customer>> GetCustomerAsync(int customerId)
+        public async Task<OperationResult<Customer>> GetCustomerAsync(int customerId)
         {
             _logger.LogInformation($"Calling {nameof(GetCustomerAsync)}");
 
             try
             {
-                using (var connection = new SqlConnection(_config.ConnectionString))
+                using (var connection = _connectionFactory.GetConnection(_config.ConnectionString))
                 {
-                    var customer = await connection.QuerySingleOrDefaultAsync<Customer>("select * from customers where id=@customerId", new {customerId });
+                    var customer = await connection.QuerySingleOrDefaultAsync<Customer>("select * from customers where id=@customerId", new {customerId});
                     if (customer == null)
                     {
                         _logger.LogInformation($"Customer does not exist: {customerId}");
@@ -87,7 +87,7 @@ namespace FunkyBank.DataAccess.Dapper.Repositories
                                      "output inserted.Id, inserted.Name, inserted.Address " +
                                      "values (@Name, @Address)";
 
-                using (var connection = new SqlConnection(_config.ConnectionString))
+                using (var connection = _connectionFactory.GetConnection(_config.ConnectionString))
                 {
                     var insertedCustomers = await connection.QueryAsync<Customer>(query, customer);
                     var insertedCustomer = insertedCustomers.First();
@@ -120,10 +120,10 @@ namespace FunkyBank.DataAccess.Dapper.Repositories
                                      "output inserted.Id, inserted.Name, inserted.Address " +
                                      "where id=@Id";
 
-                using (var connection = new SqlConnection(_config.ConnectionString))
+                using (var connection = _connectionFactory.GetConnection(_config.ConnectionString))
                 {
                     var updatedCustomer = await connection.QueryFirstOrDefaultAsync<Customer>(query, customer);
-                   
+
                     if (updatedCustomer == null)
                     {
                         _logger.LogError("Error: Customer does not exist to update");
@@ -150,7 +150,7 @@ namespace FunkyBank.DataAccess.Dapper.Repositories
                                      "output deleted.Id, deleted.Name, deleted.Address " +
                                      "where Id = @customerId";
 
-                using (var connection = new SqlConnection(_config.ConnectionString))
+                using (var connection = _connectionFactory.GetConnection(_config.ConnectionString))
                 {
                     var deletedCustomer = await connection.QueryFirstOrDefaultAsync<Customer>(query, new {customerId});
                     if (deletedCustomer == null)
@@ -166,7 +166,7 @@ namespace FunkyBank.DataAccess.Dapper.Repositories
             catch (Exception exception)
             {
                 _logger.LogError(exception, "Error: Cannot delete customer");
-               return OperationResult.Failure("Cannot delete customer");
+                return OperationResult.Failure("Cannot delete customer");
             }
         }
     }

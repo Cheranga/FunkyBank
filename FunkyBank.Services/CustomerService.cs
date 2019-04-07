@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
@@ -19,6 +20,16 @@ namespace FunkyBank.Services
 
         public CustomerService(ICustomerRepository customerRepository, ILogger<CustomerService> logger)
         {
+            if (customerRepository == null)
+            {
+                throw new ArgumentNullException(nameof(customerRepository));
+            }
+
+            if (logger == null)
+            {
+                throw new ArgumentNullException(nameof(logger));
+            }
+
             _customerRepository = customerRepository;
             _logger = logger;
         }

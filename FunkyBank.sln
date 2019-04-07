@@ -32,6 +32,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Util", "Util", "{3AF10C34-9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunkyBank.DataAccess.Migrations.DbUp", "FunkyBank.DataAccess.Migrations.DbUp\FunkyBank.DataAccess.Migrations.DbUp.csproj", "{B7729F97-FF17-4117-8D60-F898035293BA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9F5818D9-C44D-4529-8606-49C5E80C4AF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunkyBank.Services.Unit.Tests", "FunkyBank.Services.Unit.Tests\FunkyBank.Services.Unit.Tests.csproj", "{E6062961-5807-4AE2-9BCE-4DFB08A148E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +70,10 @@ Global
 		{B7729F97-FF17-4117-8D60-F898035293BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7729F97-FF17-4117-8D60-F898035293BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7729F97-FF17-4117-8D60-F898035293BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6062961-5807-4AE2-9BCE-4DFB08A148E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6062961-5807-4AE2-9BCE-4DFB08A148E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6062961-5807-4AE2-9BCE-4DFB08A148E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6062961-5807-4AE2-9BCE-4DFB08A148E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +86,7 @@ Global
 		{15B03E38-EE84-4712-8131-D14B7518EE80} = {AEE9F748-D991-46A6-958A-D6AD9209D588}
 		{33F5AE92-2A6C-45A0-B06A-8667E6CA8D0C} = {1BF6A50C-BD66-4406-B409-D1CA03951D2A}
 		{B7729F97-FF17-4117-8D60-F898035293BA} = {3AF10C34-93BC-48D9-BE94-8EA4D9800A8A}
+		{E6062961-5807-4AE2-9BCE-4DFB08A148E8} = {9F5818D9-C44D-4529-8606-49C5E80C4AF5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6EA89487-2CF7-402A-811C-F7A102E1781B}
