@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net.Http.Headers;
 using Autofac;
 using AzureFunctions.Autofac.Configuration;
@@ -55,6 +56,11 @@ namespace FunkyBank.CustomersApi
             configurationBuilder.AddAzureKeyVault(keyVaultUrl, keyVaultClient, new DefaultKeyVaultSecretManager());
 
             connectionString = configuration["FunkyBankConnectionString"];
+
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new ArgumentNullException("Connection string is empty or null");
+            }
 
             return new DatabaseConfig
             {
