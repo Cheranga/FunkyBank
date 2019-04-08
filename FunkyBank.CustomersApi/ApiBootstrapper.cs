@@ -40,7 +40,7 @@ namespace FunkyBank.CustomersApi
             var keyVaultUrl = configuration.GetValue<string>("KeyVaultUrl");
             if (string.IsNullOrEmpty(keyVaultUrl))
             {
-                connectionString = configuration.GetValue<string>("DatabaseConnection");
+                connectionString = configuration.GetValue<string>("FunkyBankConnectionString");
                 return new DatabaseConfig
                 {
                     ConnectionString = connectionString
@@ -49,7 +49,7 @@ namespace FunkyBank.CustomersApi
             //
             // Get the connection string from AKV
             //
-            var akvUrl = configuration[keyVaultUrl];
+            var akvUrl = configuration.GetValue<string>("FunkyBankConnectionString");
             var tokenProvider = new AzureServiceTokenProvider();
             var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(tokenProvider.KeyVaultTokenCallback));
 
