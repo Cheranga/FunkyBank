@@ -28,17 +28,7 @@ namespace FunkyBank.CustomersApi.Functions
         {
             logger.LogInformation($"Calling {nameof(GetCustomersFunction)}");
 
-            var getCustomersRequest = JsonConvert.DeserializeObject<GetCustomersRequest>(await new StreamReader(req.Body).ReadToEndAsync());
-
-            var isValid = getCustomersRequest.Validate();
-
-            if (!isValid)
-            {
-                logger.LogError("Error: Invalid request");
-                return new BadRequestObjectResult("Invalid request");
-            }
-
-            var operationResult = await customerService.GetCustomersAsync(getCustomersRequest).ConfigureAwait(false);
+            var operationResult = await customerService.GetCustomersAsync(new GetCustomersRequest()).ConfigureAwait(false);
 
             if (operationResult.Status)
             {
