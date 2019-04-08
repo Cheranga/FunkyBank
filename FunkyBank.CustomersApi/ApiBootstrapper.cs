@@ -49,11 +49,10 @@ namespace FunkyBank.CustomersApi
             //
             // Get the connection string from AKV
             //
-            var akvUrl = configuration["FunkyBankConnectionString"];
             var tokenProvider = new AzureServiceTokenProvider();
             var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(tokenProvider.KeyVaultTokenCallback));
 
-            configurationBuilder.AddAzureKeyVault(akvUrl, keyVaultClient, new DefaultKeyVaultSecretManager());
+            configurationBuilder.AddAzureKeyVault(keyVaultUrl, keyVaultClient, new DefaultKeyVaultSecretManager());
 
             connectionString = configuration["FunkyBankConnectionString"];
 

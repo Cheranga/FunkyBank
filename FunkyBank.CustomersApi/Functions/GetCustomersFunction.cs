@@ -35,6 +35,7 @@ namespace FunkyBank.CustomersApi.Functions
                 return new OkObjectResult(operationResult.Data);
             }
 
+            logger.LogError(operationResult.Message);
             return new BadRequestObjectResult(operationResult.Message);
         }
     }
