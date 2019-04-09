@@ -45,8 +45,8 @@ namespace FunkyBank.CustomersApi
                 var configuration = configurationBuilder
                     .SetBasePath(Directory.GetCurrentDirectory())
                     //.AddJsonFile("appsettings.json")
-                    .AddAzureKeyVault(keyVaultUrl, keyVaultClient, new DefaultKeyVaultSecretManager())
                     .AddEnvironmentVariables()
+                    .AddAzureKeyVault(keyVaultUrl, keyVaultClient, new DefaultKeyVaultSecretManager())
                     .Build();
 
                 var connectionString = configuration["FunkyBankConnectionStringKey"];
