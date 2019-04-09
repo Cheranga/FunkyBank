@@ -57,9 +57,17 @@ namespace FunkyBank.CustomersApi
             var tokenProvider = new AzureServiceTokenProvider();
             var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(tokenProvider.KeyVaultTokenCallback));
 
-            configurationBuilder.AddAzureKeyVault(keyVaultUrl, keyVaultClient, new DefaultKeyVaultSecretManager());
+            var secret = keyVaultClient.GetSecretAsync($"{keyVaultUrl}secrets/FunkyBankConnectionString").Result;
+            if (secret == null || string.IsNullOrEmpty(secret.Value))
+            {
+                throw new Exception("Cannot get the secret value");
+            }
 
-            connectionString = configuration["FunkyBankConnectionStringKey"];
+            //configurationBuilder.AddAzureKeyVault(keyVaultUrl, keyVaultClient, new DefaultKeyVaultSecretManager());
+
+            //connectionString = configuration["FunkyBankConnectionStringKey"];
+
+            connectionString = secret.Value;
 
             if (string.IsNullOrEmpty(connectionString))
             {
