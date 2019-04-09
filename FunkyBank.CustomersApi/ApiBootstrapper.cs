@@ -33,51 +33,73 @@ namespace FunkyBank.CustomersApi
 
         private DatabaseConfig GetDatabaseConfig(ContainerBuilder builder)
         {
-            var configurationBuilder = new ConfigurationBuilder();
-            var configuration = configurationBuilder
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .AddEnvironmentVariables()
-                .Build();
-
-            var connectionString = string.Empty;
-            var keyVaultUrl = configuration.GetValue<string>("KeyVaultUrl");
-            if (string.IsNullOrEmpty(keyVaultUrl))
+            var environment =  Environment.GetEnvironmentVariable("FunctionAppEnvironment");
+            
+            if (string.Equals(environment, "Production"))
             {
-                connectionString = configuration.GetValue<string>("FunkyBankConnectionStringKey");
+                var keyVaultUrl = Environment.GetEnvironmentVariable("KeyVaultUrl");
+                var tokenProvider = new AzureServiceTokenProvider();
+                var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(tokenProvider.KeyVaultTokenCallback));
 
-                return new DatabaseConfig
-                {
-                    ConnectionString = connectionString
-                };
+                var configurationBuilder = new ConfigurationBuilder();
+                var configuration = configurationBuilder
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    //.AddJsonFile("appsettings.json")
+                    .AddAzureKeyVault(keyVaultUrl, keyVaultClient, new DefaultKeyVaultSecretManager())
+                    .AddEnvironmentVariables()
+                    .Build();
+
+                var connectionString = configuration["FunkyBankConnectionStringKey"];
+
+                return new DatabaseConfig {ConnectionString = connectionString};
+
             }
-            //
-            // Get the connection string from AKV
-            //
-            var tokenProvider = new AzureServiceTokenProvider();
-            var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(tokenProvider.KeyVaultTokenCallback));
-
-            var secret = keyVaultClient.GetSecretAsync($"{keyVaultUrl}secrets/FunkyBankConnectionString").Result;
-            if (secret == null || string.IsNullOrEmpty(secret.Value))
+            else
             {
-                throw new Exception("Cannot get the secret value");
+                var connectionString = Environment.GetEnvironmentVariable("FunkyBankConnectionStringKey");
+                return new DatabaseConfig {ConnectionString = connectionString};
             }
 
-            //configurationBuilder.AddAzureKeyVault(keyVaultUrl, keyVaultClient, new DefaultKeyVaultSecretManager());
+           
 
-            //connectionString = configuration["FunkyBankConnectionStringKey"];
+            //var connectionString = string.Empty;
+            //var keyVaultUrl = configuration.GetValue<string>("KeyVaultUrl");
+            //if (string.IsNullOrEmpty(keyVaultUrl))
+            //{
+            //    connectionString = configuration.GetValue<string>("FunkyBankConnectionStringKey");
 
-            connectionString = secret.Value;
+            //    return new DatabaseConfig
+            //    {
+            //        ConnectionString = connectionString
+            //    };
+            //}
+            ////
+            //// Get the connection string from AKV
+            ////
+            //var tokenProvider = new AzureServiceTokenProvider();
+            //var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(tokenProvider.KeyVaultTokenCallback));
 
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                throw new ArgumentNullException("Connection string is empty or null");
-            }
+            //var secret = keyVaultClient.GetSecretAsync($"{keyVaultUrl}secrets/FunkyBankConnectionString").Result;
+            //if (secret == null || string.IsNullOrEmpty(secret.Value))
+            //{
+            //    throw new Exception("Cannot get the secret value");
+            //}
 
-            return new DatabaseConfig
-            {
-                ConnectionString = connectionString
-            };
+            ////configurationBuilder.AddAzureKeyVault(keyVaultUrl, keyVaultClient, new DefaultKeyVaultSecretManager());
+
+            ////connectionString = configuration["FunkyBankConnectionStringKey"];
+
+            //connectionString = secret.Value;
+
+            //if (string.IsNullOrEmpty(connectionString))
+            //{
+            //    throw new ArgumentNullException("Connection string is empty or null");
+            //}
+
+            //return new DatabaseConfig
+            //{
+            //    ConnectionString = connectionString
+            //};
         }
 
         private void RegisterLogging(ContainerBuilder builder)
