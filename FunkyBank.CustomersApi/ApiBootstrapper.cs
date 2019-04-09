@@ -43,7 +43,7 @@ namespace FunkyBank.CustomersApi
 
                 var configurationBuilder = new ConfigurationBuilder();
                 var configuration = configurationBuilder
-                    .SetBasePath(Directory.GetCurrentDirectory())
+                    //.SetBasePath(Directory.GetCurrentDirectory())
                     //.AddJsonFile("appsettings.json")
                     .AddAzureKeyVault(keyVaultUrl, keyVaultClient, new DefaultKeyVaultSecretManager())
                     .AddEnvironmentVariables()
