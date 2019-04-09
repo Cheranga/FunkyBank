@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AzureFunctions.Autofac;
 using FunkyBank.Core;
+using FunkyBank.DataAccess.Core;
 using FunkyBank.DTO.Requests;
 using FunkyBank.Services;
 using Microsoft.AspNetCore.Http;
@@ -24,9 +25,12 @@ namespace FunkyBank.CustomersApi.Functions
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "customers")]
             HttpRequest req,
             [Inject] ICustomerService customerService,
+            [Inject]DatabaseConfig config,
             ILogger logger)
         {
             logger.LogInformation($"Calling {nameof(GetCustomersFunction)} : {DateTime.UtcNow}");
+
+            logger.LogInformation($"Database config: {config.ConnectionString}");
 
             var operationResult = await customerService.GetCustomersAsync(new GetCustomersRequest()).ConfigureAwait(false);
 
