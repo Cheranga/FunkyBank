@@ -25,12 +25,9 @@ namespace FunkyBank.CustomersApi.Functions
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "customers")]
             HttpRequest req,
             [Inject] ICustomerService customerService,
-            [Inject]DatabaseConfig config,
             ILogger logger)
         {
             logger.LogInformation($"Calling {nameof(GetCustomersFunction)} : {DateTime.UtcNow}");
-
-            logger.LogInformation($"Database config: {config.ConnectionString}");
 
             var operationResult = await customerService.GetCustomersAsync(new GetCustomersRequest()).ConfigureAwait(false);
 

@@ -17,10 +17,6 @@ namespace FunkyBank.DataAccess.Migrations.DbUp
 
             var connectionString = args.First();
 
-            Console.WriteLine($"Connection String Passed: {connectionString}");
-
-            Console.WriteLine($"Connection String: {connectionString}");
-
             EnsureDatabase.For.SqlDatabase(connectionString);
 
             var upgrader =
@@ -30,9 +26,22 @@ namespace FunkyBank.DataAccess.Migrations.DbUp
                     .LogToAutodetectedLog()
                     .Build();
 
-            var result = upgrader.PerformUpgrade();
+            if (upgrader.IsUpgradeRequired())
+            {
+                Console.WriteLine("Database migrations are available. Applying the necessary changes now...");
+                var result = upgrader.PerformUpgrade();
 
-            return result.Successful ? 0 : -1;
+                if (result.Successful)
+                {
+                    Console.WriteLine("Database migration was successful");
+                    return 0;
+                }
+
+                Console.WriteLine("Database migration was unsuccessful");
+                return -1;
+            }
+
+            return 0;
         }
     }
 }

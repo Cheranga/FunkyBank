@@ -15,31 +15,8 @@ namespace FunkyBank.DataAccess.Dapper
     {
         public static void Register(ContainerBuilder builder, DatabaseConfig config)
         {
-            //
-            // Load the configuration information and, get the connection string
-            //
-            //var configuration = new ConfigurationBuilder()
-            //    .SetBasePath(Directory.GetCurrentDirectory())
-            //    .AddJsonFile("appsettings.json")
-            //    .AddEnvironmentVariables()
-            //    .Build();
-
-            //var connectionString = configuration.GetValue<string>("DatabaseConnection");
-
-            //if (string.IsNullOrWhiteSpace(
-            //    connectionString))
-            //{
-            //    throw new Exception("Error: The connection string property is not set in the configuration");
-            //}
-
             builder.RegisterType<DbConnectionFactory>().As<IDbConnectionFactory>();
             builder.RegisterType<CustomerRepository>().As<ICustomerRepository>().WithParameter("config", config);
-
-            //builder.RegisterType<CustomerRepository>().As<ICustomerRepository>().WithParameter("config", new DatabaseConfig
-            //{
-            //    ConnectionString = connectionString
-            //});
-
         }
     }
 }

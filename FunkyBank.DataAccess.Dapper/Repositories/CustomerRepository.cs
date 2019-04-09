@@ -36,8 +36,6 @@ namespace FunkyBank.DataAccess.Dapper.Repositories
 
             try
             {
-                _logger.LogInformation($"Using connection string : {_config.ConnectionString}");
-
                 using (var connection = _connectionFactory.GetConnection(_config.ConnectionString))
                 {
                     var customers = await connection.QueryAsync<Customer>("select * from customers").ConfigureAwait(false);
