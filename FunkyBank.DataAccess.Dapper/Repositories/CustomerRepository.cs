@@ -20,6 +20,11 @@ namespace FunkyBank.DataAccess.Dapper.Repositories
 
         public CustomerRepository(DatabaseConfig config, IDbConnectionFactory connectionFactory, ILogger<CustomerRepository> logger)
         {
+            if (config == null || string.IsNullOrEmpty(config.ConnectionString))
+            {
+                throw new ArgumentNullException(nameof(config));
+            }
+
             _config = config;
             _connectionFactory = connectionFactory;
             _logger = logger;

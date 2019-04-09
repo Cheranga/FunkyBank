@@ -26,7 +26,7 @@ namespace FunkyBank.CustomersApi.Functions
             [Inject] ICustomerService customerService,
             ILogger logger)
         {
-            logger.LogInformation($"Calling {nameof(GetCustomersFunction)}");
+            logger.LogInformation($"Calling {nameof(GetCustomersFunction)} : {DateTime.UtcNow}");
 
             var operationResult = await customerService.GetCustomersAsync(new GetCustomersRequest()).ConfigureAwait(false);
 
