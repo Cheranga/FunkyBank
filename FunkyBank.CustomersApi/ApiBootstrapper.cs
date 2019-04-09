@@ -24,6 +24,8 @@ namespace FunkyBank.CustomersApi
 
                 var config =  GetDatabaseConfig(builder);
 
+                builder.RegisterInstance(config);
+
 
                 ServicesBootstrapper.Register(builder, config);
             }, functionName);
