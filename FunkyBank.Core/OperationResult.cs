@@ -1,6 +1,6 @@
 ﻿namespace FunkyBank.Core
 {
-    public class OperationResult
+    public struct OperationResult
     {
         public bool Status { get; set; }
         public string Message { get; set; }
@@ -23,8 +23,10 @@
         }
     }
 
-    public class OperationResult<T> : OperationResult
+    public struct OperationResult<T>
     {
+        public bool Status { get; set; }
+        public string Message { get; set; }
         public T Data { get; set; }
 
         public static OperationResult<T> Success(T data)
@@ -46,7 +48,7 @@
             };
         }
 
-        public new static OperationResult<T> Failure(string message)
+        public static OperationResult<T> Failure(string message)
         {
             return new OperationResult<T>
             {
