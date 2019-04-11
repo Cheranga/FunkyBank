@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/cchatangala/FunkyBank/_apis/build/status/PROD%20-%20Master%20CI?branchName=master)](https://dev.azure.com/cchatangala/FunkyBank/_build/latest?definitionId=28&branchName=master)
+
 # Notes
 
 ## Phase 1 - Adding the solution and the project structure
