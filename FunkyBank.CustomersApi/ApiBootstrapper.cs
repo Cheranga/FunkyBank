@@ -47,7 +47,7 @@ namespace FunkyBank.CustomersApi
                     .Build();
 
                 var connectionStringKey = configuration["FunkyBankConnectionStringKey"];
-                var connectionString = configuration[connectionStringKey];
+                var connectionString = connectionStringKey;//configuration[connectionStringKey];
 
                 return new DatabaseConfig {ConnectionString = connectionString};
 
