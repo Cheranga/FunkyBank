@@ -23,11 +23,28 @@ namespace FunkyBank.CustomersApi
                 RegisterLogging(builder);
 
                 var dbConfig = GetDatabaseConfig(builder);
-
                 builder.RegisterInstance(dbConfig);
+
+                var someSetting = GetSomeSetting();
+                builder.RegisterInstance(someSetting);
+
 
                 ServicesBootstrapper.Register(builder, dbConfig);
             }, functionName);
+        }
+
+        private SomeSetting GetSomeSetting()
+        {
+            var configurationBuilder = new ConfigurationBuilder();
+            var configuration = configurationBuilder
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("somesetting.json", false, true)
+                .AddEnvironmentVariables()
+                .Build();
+
+            var setting = configuration.Get<SomeSetting>();
+
+            return setting;
         }
 
         private DatabaseConfig GetDatabaseConfig(ContainerBuilder builder)
@@ -64,5 +81,11 @@ namespace FunkyBank.CustomersApi
             builder.RegisterInstance(new LoggerFactory()).As<ILoggerFactory>();
             builder.RegisterGeneric(typeof(Logger<>)).As(typeof(ILogger<>)).SingleInstance();
         }
+    }
+
+    public class SomeSetting
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
     }
 }
