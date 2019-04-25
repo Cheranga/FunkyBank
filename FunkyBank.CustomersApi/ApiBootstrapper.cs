@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Reflection;
 using Autofac;
 using AzureFunctions.Autofac.Configuration;
 using FunkyBank.DataAccess.Core;
@@ -25,8 +26,8 @@ namespace FunkyBank.CustomersApi
                 var dbConfig = GetDatabaseConfig(builder);
                 builder.RegisterInstance(dbConfig);
 
-                //var someSetting = GetSomeSetting();
-                //builder.RegisterInstance(someSetting);
+                var someSetting = GetSomeSetting();
+                builder.RegisterInstance(someSetting);
 
 
                 ServicesBootstrapper.Register(builder, dbConfig);
@@ -35,9 +36,11 @@ namespace FunkyBank.CustomersApi
 
         private SomeSetting GetSomeSetting()
         {
+            var codeBase = Assembly.GetExecutingAssembly().CodeBase;
             var configurationBuilder = new ConfigurationBuilder();
             var configuration = configurationBuilder
-                .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(Environment.CurrentDirectory)
+                //.SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("somesetting.json", false, true)
                 .AddEnvironmentVariables()
                 .Build();
