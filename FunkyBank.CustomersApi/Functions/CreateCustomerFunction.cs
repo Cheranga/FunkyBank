@@ -21,7 +21,7 @@ namespace FunkyBank.CustomersApi.Functions
     {
         [FunctionName("CreateCustomer")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "customers")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "customers")] HttpRequest req,
             [Inject]ICustomerService customerService,
             ILogger logger)
         {

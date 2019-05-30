@@ -22,7 +22,7 @@ namespace FunkyBank.CustomersApi.Functions
     {
         [FunctionName("GetCustomers")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "customers")]
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "customers")]
             HttpRequest req,
             [Inject] ICustomerService customerService,
             //[Inject]SomeSetting someSetting,
